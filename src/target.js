@@ -24,11 +24,15 @@ export class Target {
     /**
      * Try to hit specified point on taget.
      * Returns true if target is hit or false in case of miss.
-     * @param {number} point 
+     * Uses point distance formula.
+     * 
      * @example
      * // Target hit
      * const target = new Target([0, 0], 5);
      * const hitResult = taget.tryHit([1, -1]);
+     * 
+     * @param {number[]} point 
+     * 
      * @returns {boolean}
      */
     tryHit(point) {
@@ -39,6 +43,6 @@ export class Target {
         /** @type {number} */
         const centerDistance = Math.sqrt(xDistance + yDistance);
 
-        return centerDistance <= this.radius;
+        return (centerDistance <= this.radius);
     }
 }

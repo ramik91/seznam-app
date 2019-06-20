@@ -1,6 +1,6 @@
 import { Target } from './target';
 
-describe('tryHit()', () => {
+describe('tryHit', () => {
     /** @type {number[]} */
     const center = [0, 0];
     /** @type {number} */
