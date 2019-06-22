@@ -1,4 +1,4 @@
-# Seznam s.r.o demo app
+# Seznam.cz demo app
 
 ### Run examples
 
