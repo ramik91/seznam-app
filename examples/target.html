@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Target example</title>
+    <script type="module">
+        import { Target } from '../src/target.js';
+
+        document.getElementById('target-form').onsubmit = (e) => {
+            const form = e.target;
+            const formData = Object
+                .values(form)
+                .map((element) => [element.name, element.value])
+                .filter(([name, value]) => name && !isNaN(value))
+                .reduce((acc, [name, value]) => {
+                    acc[name] = Number(value);
+
+                    return acc;
+                } , {})
+
+            const target = new Target([formData.centerX, formData.centerY], formData.radius);
+            const hit = target.tryHit([formData.hitX, formData.hitY]);
+            const message = hit ? 'Target hit' : 'Target missed';
+
+            alert(message);
+            e.preventDefault();
+        };        
+    </script>
+
+    <style>
+        body {
+            align-items: center;
+            display: flex;
+            flex-flow: column;
+            text-align: center;
+        }
+
+        input {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Target example</h1>
+    <form id="target-form" onsubmit="return false;">
+        <label for="center-x">Target center X</label>
+        <input id="center-x" name="centerX" type="number" required/>
+
+        <label for="center-y">Target center Y</label>
+        <input id="center-y" name="centerY" type="number" required/>
+
+        <label for="radius">Target Radius</label>
+        <input id="radius" name="radius" type="number" required/>
+
+        <label for="hit-x">Hit point X</label>
+        <input id="hit-x" name="hitX" type="number" required/>
+
+        <label for="hit-y">Hit point Y</label>
+        <input id="hit-y" name="hitY" type="number" required/>
+
+        <button type="submit" id="shootButton">Shoot!</button>
+    </form>
+</body>
+</html>
